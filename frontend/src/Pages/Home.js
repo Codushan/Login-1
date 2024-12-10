@@ -49,11 +49,14 @@ const Home = () => {
         const response = await fetch(URL, headers);
         const result = await response.json();
         console.log(result);
-        setProducts(result);
+        // Ensure result is an array before setting state
+        setProducts(Array.isArray(result) ? result : []);
     } catch (err) {
         handleError(err);
+        // Set to an empty array in case of error
+        setProducts([]);
     }
-  }
+}
 
   useEffect(() => {
     if (isLoggedInUser) {
